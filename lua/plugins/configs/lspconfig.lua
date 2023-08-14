@@ -41,6 +41,13 @@ M.capabilities.textDocument.completion.completionItem = {
   },
 }
 
+require('lspconfig').pyright.setup {
+  flags = {
+    debounce_text_changes = 150,
+    update_in_insert = true,
+  }
+}
+
 require("lspconfig").lua_ls.setup {
   on_attach = M.on_attach,
   capabilities = M.capabilities,
@@ -63,5 +70,33 @@ require("lspconfig").lua_ls.setup {
     },
   },
 }
+
+-- Setup Language Servers.
+
+local lspconfig = require('lspconfig')
+lspconfig.rust_analyzer.setup {
+  settings = {
+    ['rust-analyzer'] = {
+      diagnostics = {
+        enable = false;
+      }
+    },
+  }
+}
+lspconfig.tsserver.setup {}
+lspconfig.html.setup {
+  filetypes = { "html" },
+  init_options = {
+    configurationSection = { "html", "css", "javascript" },
+    embeddedLanguages = {
+      css = true,
+      javascript = true
+    }
+  },
+  settings = {}
+}
+lspconfig.angularls.setup {}
+lspconfig.cssls.setup {}
+
 
 return M

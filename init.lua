@@ -19,3 +19,12 @@ end
 dofile(vim.g.base46_cache .. "defaults")
 vim.opt.rtp:prepend(lazypath)
 require "plugins"
+
+-- Vim Plug --
+
+local Plug = vim.fn['plug#']
+vim.call('plug#begin', '~/.config/nvim/plugged')
+
+Plug ('https://github.com/neoclide/coc.nvim')
+
+vim.call('plug#end')
